@@ -1,0 +1,32 @@
+@import '~antd/dist/antd.css';
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.wallet-div {
+  display: flex;
+  justify-content: center;
+  margin: 2px 2px 2px 2px;
+  padding: 10px 10px 10px 10px
+}
+
+.wallet-info {
+  display: block;
+  text-align: center;
+  margin: 2px 2px 2px 2px;
+  padding: 10px 10px 10px 10px
+}
