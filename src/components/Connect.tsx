@@ -9,6 +9,82 @@ export const useIsMounted = () => {
 }
 
 export const Connect = () => {
+
+  useEffect(() => {
+
+    const fetchDataAsync = async () => {
+      const provider = new ethers.providers.Web3Provider(
+        (window as any).ethereum,
+        'any'
+      )
+
+      const signer = provider.getSigner()
+  
+      let greet = new ethers.Contract(
+        '0x5FbDB2315678afecb367f032d93F642f64180aa3',
+        [
+          {
+            "inputs": [
+              {
+                "internalType": "string",
+                "name": "_greeting",
+                "type": "string"
+              }
+            ],
+            "stateMutability": "nonpayable",
+            "type": "constructor"
+          },
+          {
+            "inputs": [],
+            "name": "greet",
+            "outputs": [
+              {
+                "internalType": "string",
+                "name": "",
+                "type": "string"
+              }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+          },
+          {
+            "inputs": [
+              {
+                "internalType": "string",
+                "name": "_greeting",
+                "type": "string"
+              }
+            ],
+            "name": "setGreeting",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+          }
+        ],
+        provider
+      )
+      const message = await greet.greet() // read
+      const tx = await greet.connect(signer).setGreeting("ui") // write
+      console.log(message, "message")
+      console.log(tx, "tx")
+
+      tx.wait().then(
+        (receipt: any) => {
+       
+          message.success('Funds withdrawn')
+  
+        },
+        (error: any) => {
+       
+          console.log('Error', error)
+       
+        }
+      )
+    }
+     fetchDataAsync()
+
+  }, [])
+
   const isMounted = useIsMounted()
   const [{ data, error }, connect] = useConnect()
   const [{ data: accountData }, disconnect] = useAccount({
